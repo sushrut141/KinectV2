@@ -1,0 +1,1 @@
+/home/sushrut/Desktop/grabber/Kinect2Grabber/lib/libkinectgrabber.so

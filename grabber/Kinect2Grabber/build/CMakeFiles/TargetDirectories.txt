@@ -1,0 +1,1 @@
+/home/sushrut/Desktop/grabber/Kinect2Grabber/build/CMakeFiles/kinectgrabber.dir
