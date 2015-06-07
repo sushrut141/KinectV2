@@ -1,0 +1,9 @@
+Camera calibration takes a long time and requires a set of images to calibrate
+|
+==> See ImgLoader.h
+    Store camera matrix as a file to load as matrix instead of computing everytime
+
+Visualized Point Cloud is misaligned and shows tearing
+|
+==> See PCViewer.h
+    Find actual depth value from depth image data as given on OpenKinect.org
