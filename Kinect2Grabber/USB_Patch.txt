@@ -1,0 +1,4 @@
+libfreenect2 requires that the grabber link to the patched usb-1.0 shared object in the libusb directory
+default libusb.so will not work
+                              |
+                              ==>Outputs error : Failed to submit transmission
