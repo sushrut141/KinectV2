@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -g   -shared -Wl,-soname,libkinectgrabber.so -o libkinectgrabber.so CMakeFiles/kinectgrabber.dir/src/Kinect2Grabber.cpp.o  -L/home/sushrut/Desktop/grabber/Kinect2Grabber/libusb/lib -lusb-1.0 -lturbojpeg /usr/local/lib/libfreenect2.so -Wl,-rpath,/home/sushrut/Desktop/grabber/Kinect2Grabber/libusb/lib:/usr/local/lib: 
