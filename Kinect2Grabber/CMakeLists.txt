@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(Kinect2Grabber)
-option(ENABLE_CXX11 "Enable C++11 support" ONN)
+option(ENABLE_CXX11 "Enable C++11 support" ON)
 
 
 if(ENABLE_CXX11)
