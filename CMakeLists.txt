@@ -41,7 +41,8 @@ set(GRABBER "${IMGL}/Kinect2Grabber/lib/libkinectgrabber.so")
 
 
 include_directories("${IMGL}/Kinect2Grabber/libusb/include/libusb-1.0/")
-link_directories("${GRABBER}/Kinect2Grabber/libusb/lib/")
+link_directories("${IMGL}/Kinect2Grabber/libusb/lib/")
+set(USB "${IMGL}/Kinect2Grabber/libusb/lib/libusb-1.0.so.0.1.0")
 
 
 
@@ -50,7 +51,7 @@ set(LINK
 	${PCVL}
 	${GRABBER}
 	${freenect2_LIBRARIES}
-	usb-1.0
+	${USB}
 	turbojpeg
 	${PCL_LIBS}
 	pcl_visualization
