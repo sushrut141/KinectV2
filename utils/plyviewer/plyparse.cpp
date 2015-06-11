@@ -11,6 +11,7 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/console/parse.h>
 #include <pcl/point_types.h>
+#include <pcl/filters/voxel_grid.h>
 
 struct Point 
 {
@@ -85,6 +86,7 @@ int main(int argc,char**argv)
 	*/
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>());
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZRGB>());
 
 	cloud->points.resize(vertex_num);
 
@@ -100,6 +102,22 @@ int main(int argc,char**argv)
 		cloud->points[i].b = points[i].b;
 	}
 
+	//downsample
+	pcl::VoxelGrid<pcl::PointXYZRGB>  sor;
+  	sor.setInputCloud (cloud);
+  	sor.setLeafSize (0.01f, 0.01f, 0.01f);
+  	sor.filter (*cloud_filtered);
+
+  	std::cout<<"Number of points ater filtering"<<cloud_filtered->width*cloud_filtered->height<<std::endl;
+
+  	pcl::visualization::PCLVisualizer* viewer_f (new pcl::visualization::PCLVisualizer ("Kinect Cloud_Filter"));
+  	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb_f(cloud_filtered);
+  	viewer_f->addPointCloud<pcl::PointXYZRGB>(cloud_filtered,rgb_f,"Kinect Cloud_Filter");
+    viewer_f->setBackgroundColor (0, 0, 0);
+    viewer_f->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE,3, "Kinect Cloud_Filter");
+	viewer_f->addCoordinateSystem (1.0);
+	viewer_f->initCameraParameters ();
+
 	pcl::visualization::PCLVisualizer* viewer (new pcl::visualization::PCLVisualizer ("Kinect Cloud"));
 	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud);
 	viewer->addPointCloud<pcl::PointXYZRGB>(cloud,rgb,"Kinect Cloud");
@@ -110,6 +128,8 @@ int main(int argc,char**argv)
 
     viewer->updatePointCloud(cloud, "Kinect Cloud");
 	viewer->spinOnce (100000);
+	viewer_f->updatePointCloud(cloud_filtered, "Kinect Cloud");
+	viewer_f->spinOnce (100000);
 
 	delete viewer;
 
