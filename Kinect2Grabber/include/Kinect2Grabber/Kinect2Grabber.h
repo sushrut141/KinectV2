@@ -3,6 +3,7 @@
 
 #include <string>
 #include <libfreenect2/libfreenect2.hpp>
+#include <libfreenect2/registration.h>
 #include <libfreenect2/frame_listener_impl.h>
 #include <libfreenect2/packet_pipeline.h>
 #include <opencv2/opencv.hpp>
@@ -30,7 +31,11 @@ namespace kinect
 
 		~Kinect2Grabber();
 
-		FrameData&  getFrameData();
+		const FrameData&  getFrameData();
+
+		const FrameData& getRegisteredImage();
+
+		const libfreenect2::Freenect2Device::ColorCameraParams& getColorCameraParams();
 
 	private:
 
@@ -41,6 +46,12 @@ namespace kinect
 		libfreenect2::Freenect2Device* dev_;
 		libfreenect2::PacketPipeline* pipeline_; 
 		libfreenect2::FrameMap frames_;
+
+		libfreenect2::Registration* registration;
+
+		libfreenect2::Freenect2Device::ColorCameraParams rgb_camera_;
+
+		unsigned char* registered;
 
 		FrameData data_;
 	};
