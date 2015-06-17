@@ -7,11 +7,15 @@
 
 //PCL
 #include <pcl/common/common_headers.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/console/parse.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
+
+//print pcd file
+bool print = false;
 
 struct Point 
 {
@@ -32,6 +36,8 @@ struct Point
 
 int main(int argc,char**argv)
 {
+
+	pcl::PLYWriter writer;
 	if(argc!=2){
 		std::cout<<"Enter path to .ply file to run"<<std::endl;
 		exit(EXIT_FAILURE);
@@ -108,6 +114,8 @@ int main(int argc,char**argv)
   	sor.setLeafSize (0.01f, 0.01f, 0.01f);
   	sor.filter (*cloud_filtered);
 
+  	writer.write("../acad.ply",*cloud_filtered);
+
   	std::cout<<"Number of points ater filtering"<<cloud_filtered->width*cloud_filtered->height<<std::endl;
 
   	pcl::visualization::PCLVisualizer* viewer_f (new pcl::visualization::PCLVisualizer ("Kinect Cloud_Filter"));
@@ -130,6 +138,13 @@ int main(int argc,char**argv)
 	viewer->spinOnce (100000);
 	viewer_f->updatePointCloud(cloud_filtered, "Kinect Cloud");
 	viewer_f->spinOnce (100000);
+
+	if(print){
+				cloud_->height = 1;
+				cloud_->width = cloud_->points.size();
+				pcl::io::savePCDFileASCII ("test_new.pcd",*cloud_);
+				print = false;
+			}
 
 	delete viewer;
 
