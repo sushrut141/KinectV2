@@ -1,0 +1,1 @@
+/home/sushrut/Desktop/alignCloud/Kinect2Grabber/build/CMakeFiles/kinectgrabber.dir

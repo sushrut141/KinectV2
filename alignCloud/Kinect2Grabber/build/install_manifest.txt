@@ -1,0 +1,1 @@
+/home/sushrut/Desktop/alignCloud/Kinect2Grabber/lib/libkinectgrabber.so
