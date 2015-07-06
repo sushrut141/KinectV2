@@ -9,11 +9,15 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
+//PCL
+#include <pcl/common/common_headers.h>
+#include <pcl/point_types.h>
 
 
 
 namespace kinect
 {
+
 	struct FrameData
 	{
 		cv::Mat color_;
@@ -35,9 +39,18 @@ namespace kinect
 
 		const FrameData& getRegisteredImage();
 
-		const libfreenect2::Freenect2Device::ColorCameraParams& getColorCameraParams();
+		const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& getPointCloud();
+
+		const libfreenect2::Freenect2Device::IrCameraParams& getIrParams();
 
 	private:
+
+		void captureRegisteredImage();
+
+		void captureFrameData();
+
+
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_;
 
 		std::string deviceSerial_;
 		libfreenect2::Freenect2 freenect2_;
@@ -49,8 +62,11 @@ namespace kinect
 
 		libfreenect2::Registration* registration;
 
-		libfreenect2::Freenect2Device::ColorCameraParams rgb_camera_;
+		libfreenect2::Freenect2Device::IrCameraParams ir_camera_;
 
+		libfreenect2::Frame *rgb;
+		libfreenect2::Frame *depth;
+		libfreenect2::Frame *ir;
 		unsigned char* registered;
 
 		FrameData data_;
