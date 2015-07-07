@@ -1,0 +1,7 @@
+PointCloud alignment using Visual Features
+
+Features detected and matched using SURF + FLANN based matcher
+
+Best Homography between two rgb images found using RANSAC
+
+3D transform computed by using points that were used to find the best homography
