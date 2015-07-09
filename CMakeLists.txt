@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(CALIB)
 
+add_subdirectory(Kinect2Grabber)
+
 set(IMGL ${CALIB_SOURCE_DIR})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -28,15 +30,11 @@ endif(freenect2_FOUND)
 find_package(OpenCV 2)
 include_directories(${OpenCV_INCLUDE_DIRECTORIES})
 
-#PCViewer
-include_directories("${IMGL}/PCViewer/include")
-link_directories("${IMGL}/PCViewer/lib/")
 
 #kinect2Grabber
 include_directories("${IMGL}/Kinect2Grabber/include")
 link_directories("${IMGL}/Kinect2Grabber/lib/")
 
-set(PCVL "${IMGL}/PCViewer/lib/libpclviewer.so")
 set(GRABBER "${IMGL}/Kinect2Grabber/lib/libkinectgrabber.so")
 
 
@@ -48,7 +46,6 @@ set(USB "${IMGL}/Kinect2Grabber/libusb/lib/libusb-1.0.so.0.1.0")
 
 set(LINK
 	boost_system
-	${PCVL}
 	${GRABBER}
 	${freenect2_LIBRARIES}
 	${USB}
