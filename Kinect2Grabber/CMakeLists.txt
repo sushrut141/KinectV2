@@ -20,6 +20,10 @@ else(freenect2_FOUND)
 	message(" libfreenect was not found")
 endif(freenect2_FOUND)
 
+find_package(PCL 1.7 REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LINK_DIRS})
+
 include_directories("${MY_DIR}/libusb/include/libusb-1.0/")
 link_directories("${MY_DIR}/libusb/lib/")
 
@@ -38,6 +42,7 @@ set(LINK
 	usb-1.0
 	turbojpeg
 	${FREENECT2}
+	${PCL_LIBRARIES}
 	${OpenCV_LIB}
 )
 
