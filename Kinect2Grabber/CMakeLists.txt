@@ -1,12 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(Kinect2Grabber)
-option(ENABLE_CXX11 "Enable C++11 support" ON)
-
-
-if(ENABLE_CXX11)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-endif(ENABLE_CXX11)
 
 set(MY_DIR ${Kinect2Grabber_SOURCE_DIR})
 
