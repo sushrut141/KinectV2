@@ -3,6 +3,7 @@
 
 libfreenect2 used to interface with the kinect
 Point Cloud Library used for getting point cluds from images and visualizing
+using Point Cloud Library
 
 The Frame grabber functonality is present in the Kinect2Grabber class
 Build the grabber/Kinect2Grabber as
